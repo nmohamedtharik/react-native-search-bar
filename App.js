@@ -5,8 +5,9 @@ import SearchBar from "./assets/pages/SearchBar";
 export default function App() {
     return (
         <View style={styles.container}>
-            <SearchBar placeholder={"Enter to search"}/>
-            <View><Text>Body</Text></View>
+            <SearchBar placeholder={"Enter to search"} value={"word"} disableSearchBtnStyle={{}} onSubmit={(text) => {
+                alert(text);
+            }}/>
         </View>
     );
 }
@@ -14,6 +15,7 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginTop: 30,
         flexDirection: "column",
         backgroundColor: '#fff',
         alignItems: "flex-start",
