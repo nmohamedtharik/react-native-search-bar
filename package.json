@@ -19,5 +19,24 @@
   "devDependencies": {
     "babel-preset-expo": "~8.0.0"
   },
-  "private": true
+  "private": false,
+  "name": "react-native-simple-custom-search-bar",
+  "description": "Simple Search filed",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmohamedtharik/react-native-search-bar.git"
+  },
+  "keywords": [
+    "React",
+    "Native",
+    "Search",
+    "Field"
+  ],
+  "author": "N Mohamed Tharik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nmohamedtharik/react-native-search-bar/issues"
+  },
+  "homepage": "https://github.com/nmohamedtharik/react-native-search-bar#readme"
 }
