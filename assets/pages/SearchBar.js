@@ -1,12 +1,12 @@
 import React from "react";
-import {View, Text, TextInput, StyleSheet} from "react-native";
+import {View, Text, TextInput, StyleSheet, AppRegistry} from "react-native";
 import {Button} from "react-native-elements";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class SearchBar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {...props}
+        this.state = {search: true, ...props}
     }
 
     _on_submit = () => {
@@ -33,11 +33,17 @@ class SearchBar extends React.Component {
             borderColor: "lightgray",
             borderWidth: StyleSheet.hairlineWidth
         }}>
-            <Icon name={"search"} size={12} color={"gray"} style={{marginLeft: 5}}/>
+            {this.state.search ? (<Icon name={"search"} size={12} color={"gray"} style={{marginLeft: 5}}/>) : (
+                <Icon name={"back"} size={12} color={"gray"} style={{marginLeft: 5}} onPress={() => {
+                    if (this.state.onBackPress) this.state.onBackPress();
+                }}/>)}
             <View style={{flex: 1, marginLeft: 8}}><TextInput placeholder={this.state.placeholder}
                                                               defaultValue={this.state.value}
                                                               value={this.state.value}
-                                                              onBlur={() => this._text_on_blur()}
+                                                              onFocus={() => {
+                                                                  this.setState({search: false})
+                                                              }}
+                                                              onBlur={() => this.setState({search: true}, () => this._text_on_blur())}
                                                               onChangeText={text => this._text_on_change(text)}/>
             </View>
             {(this.state.value.trim() !== '' ? (<Button
@@ -52,7 +58,8 @@ class SearchBar extends React.Component {
                 type={"clear"}
             />) : null)}
             <Button disabledTitleStyle={[{color: "lightgray"}, this.state.disableSearchBtnStyle]}
-                    disabled={this.state.value.trim() === ''} type={"clear"} title={"search"}
+                    disabled={this.state.value.trim() === ''} type={"clear"}
+                    icon={<Icon name={"search"} size={12} color={"gray"}/>}
                     onPress={() => this._on_submit()}/>
         </View>);
     }
@@ -60,3 +67,5 @@ class SearchBar extends React.Component {
 
 export default SearchBar;
 module.exports = SearchBar;
+
+AppRegistry.registerComponent('SearchBar', () => SearchBar)
